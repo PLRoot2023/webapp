@@ -3,16 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>hello world</title>
+    <link rel="stylesheet" th:href="@{common/bootstrap/css/bootstrap.min.css}">
+    <script th:src="@{common/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-    <p th:text="|Hello, ${name}!|"></p>
-    <p th:text="|message, ${message.msgNo}!|"></p>
-    <p th:text="|message, ${message.msg}!|"></p>
-    <a href="/subpage/sub1">error link next page</a>
-    <a th:href="@{/subpage/sub1}">next page</a>
-    <a th:href="@{/subpage/form}">next page</a>
-    <div th:each="men:${men}">
-        <span th:text="${men.name}"></span>
-    </div>
+    <form action=""  th:action="@{/login}" method="post">
+        <div class="mb-3 row">
+            <label for="username" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text"  class="form-control"  id="username" name="username" placeholder="Username">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+
+            <div class="mb-3 row">
+
+                <div class="col-sm-10">
+                    <input type="submit" name="submit">
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+
 </body>
 </html>

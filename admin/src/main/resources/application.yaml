@@ -1,8 +1,19 @@
 spring:
   application:
     name: admin
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://192.168.25.135:5432/test_database?useUnicode=true&characterEncoding=UTF-8
+#    username: test_user
+#    password: test_user
 
 server:
-  port: 8081
+  port: 8088
   servlet:
     context-path: /test
+
+mybatis:
+  mapper-locations: classpath:/com/pg/admin/dao/*.xml
