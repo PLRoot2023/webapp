@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id "com.qqviaja.gradle.MybatisGenerator" version "2.5"
+}
+group 'com.pg'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+
+    maven { url "https://maven.aliyun.com/nexus/content/groups/public/"}
+    mavenCentral()
+}
+
+
+apply plugin: "com.qqviaja.gradle.MybatisGenerator"
+
+
+configurations {
+    mybatisGenerator
+}
+
+dependencies {
+    compileOnly 'org.mybatis.generator:mybatis-generator-core:1.4.2'
+    compileOnly 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+}
+
+
+mybatisGenerator {
+    // missing default true
+    overwrite  = true
+    // missing default false
+    verbose = true
+    // missing default src/main/resources/generator/generatorConfig.xml
+    configFile = 'src/main/resources/generatorConfig.xml'
+    mybatisProperties = [
+            'jdbcUrl'        : 'jdbc:postgresql://192.168.25.137:5432/test_admin?useUnicode=true&characterEncoding=UTF-8',
+            'jdbcDriverClass': 'org.postgresql.Driver',
+            'jdbcUsername'   : 'test_admin_user',
+            'jdbcPassword'   : 'test_admin_user',
+            'entityPackage'   : 'com.pg.mybatis.entity',
+            'DAOPackage'   : 'com.pg.mybatis.dao',
+            'mapperXML'   : 'com.pg.mybatis.dao',
+
+    ]
+    dependencies {
+        mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.4.2'
+        mybatisGenerator 'org.postgresql:postgresql:42.7.3'
+        mybatisGenerator 'tk.mybatis:mapper:4.3.0'
+        mybatisGenerator project(":mybatis")
+    }
+}

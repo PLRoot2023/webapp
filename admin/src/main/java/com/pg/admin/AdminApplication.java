@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@MapperScan(basePackages = "com.pg.admin.dao")
+@MapperScan(basePackages = "com.pg.**.dao")
 public class AdminApplication {
 
     public static void main(String[] args) {
