@@ -7,6 +7,7 @@ import com.pg.mybatis.entity.BRole;
 import com.pg.mybatis.entity.BUser;
 import com.pg.mybatis.entity.BUserExample;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,10 @@ public class IndexController {
 
     @Autowired
     private BRoleMapper roleMapper;
+
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
     @GetMapping("index")
@@ -50,6 +55,12 @@ public class IndexController {
         row.setUpdateTime(now);
         loginUserMapper.insertSelective(row);
         model.addAttribute("users", loginUsers);
+
+        redisTemplate.opsForValue().set("role",row1);
+
+        BRole role = (BRole)redisTemplate.opsForValue().get("role");
+
+        System.out.println(role);
         return "main";
     }
 
